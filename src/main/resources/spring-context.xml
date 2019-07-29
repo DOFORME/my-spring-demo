@@ -7,8 +7,10 @@
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- 开启注解支持 -->
     <context:annotation-config/>
 
+    <!-- 配置注解扫描包 -->
     <context:component-scan base-package="org.lc.service.*"/>
 
 
@@ -18,5 +20,10 @@
         <property name="age" value="20"/>
     </bean>
 
+    <bean id="studentService" class="org.lc.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao"/>
+    </bean>
 
+
+    <import resource="spring-dao.xml"/>
 </beans>

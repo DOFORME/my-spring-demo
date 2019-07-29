@@ -20,7 +20,6 @@ public class InitialContext {
     @Test
     void runContainer() {
         Student student = (Student) ctx.getBean("student");
-        System.out.println(student);
         log.info(student.toString());
     }
 

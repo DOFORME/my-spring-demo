@@ -1,9 +1,11 @@
 package org.lc.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
-public class Student extends Base {
+@Accessors(chain = true)
+public class Teacher extends Base {
 
     private Integer id;
 
@@ -12,5 +14,4 @@ public class Student extends Base {
     private Integer age;
 
     private Integer gender;
-
 }

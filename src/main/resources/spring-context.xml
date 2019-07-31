@@ -2,10 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       https://www.springframework.org/schema/context/spring-context.xsd">
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       https://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 开启注解支持 -->
     <context:annotation-config/>
@@ -13,17 +20,55 @@
     <!-- 配置注解扫描包 -->
     <context:component-scan base-package="org.lc.service.*"/>
 
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:config.properties"/>
 
-    <bean id="student" class="org.lc.entity.Student">
-        <property name="id" value="1"/>
-        <property name="name" value="lee"/>
-        <property name="age" value="20"/>
+    <!-- 配置mapper接口包路径 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.lc.dao"/>
     </bean>
 
-    <bean id="studentService" class="org.lc.service.impl.StudentServiceImpl">
-        <property name="studentDao" ref="studentDao"/>
+    <!-- 配置mybatis会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="dataSource" ref="myDataSource"/>
     </bean>
 
+    <!-- 配置数据源 -->
+    <bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="${jdbc.driver}"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}"/>
 
-    <import resource="spring-dao.xml"/>
+    <!-- 配置jdbcTemplate -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="myDataSource"/>
+
+    <!-- 开启事务管理 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+
+    <!-- 事务策略 -->
+    <tx:advice id="myTxAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="save"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <bean id="logAspect" class="org.lc.aspect.LogAspect"/>
+
+    <aop:config>
+        <aop:aspect ref="logAspect">
+            <aop:pointcut id="logPoint" expression="execution(* org.lc.service.impl..*.*(..))"/>
+            <aop:around pointcut-ref="logPoint" method="printLog"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- 导入其他配置文件 -->
+    <import resource="spring-redis.xml"/>
+    <import resource="spring-bean.xml"/>
+    <import resource="spring-service.xml"/>
 </beans>

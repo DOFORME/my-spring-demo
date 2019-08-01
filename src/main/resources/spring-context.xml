@@ -5,7 +5,6 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -14,8 +13,7 @@
        https://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/aop
        https://www.springframework.org/schema/aop/spring-aop.xsd
-       http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+       ">
 
     <!-- 开启注解支持 -->
     <context:annotation-config/>
@@ -26,16 +24,6 @@
     <!-- 加载配置文件 -->
     <context:property-placeholder location="classpath:config.properties"/>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/static/"/>
-        <property name="suffix" value=".html"/>
-    </bean>
-
-    <!-- 开启springMVC注解支持 -->
-    <mvc:annotation-driven/>
-
-    <!-- 静态资源映射 -->
-    <mvc:resources mapping="/static/**" location="/static/"/>
 
     <!-- 配置mapper接口包路径 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -85,4 +73,5 @@
     <import resource="spring-redis.xml"/>
     <import resource="spring-bean.xml"/>
     <import resource="spring-service.xml"/>
+    <import resource="spring-mvc.xml"/>
 </beans>

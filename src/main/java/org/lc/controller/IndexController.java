@@ -3,6 +3,7 @@ package org.lc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +17,10 @@ public class IndexController {
     }
 
     @ResponseBody
-    @RequestMapping("index2")
-    public String index2() {
-        return "success";
+    @RequestMapping("thymeleafIndex")
+    public ModelAndView index2() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("test", "test string");
+        return modelAndView;
     }
 }

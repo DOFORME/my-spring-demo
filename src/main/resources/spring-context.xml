@@ -37,6 +37,10 @@
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
 
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
+
     <!-- 配置mapper接口包路径 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="org.lc.dao"/>
@@ -85,4 +89,7 @@
     <import resource="spring-redis.xml"/>
     <import resource="spring-bean.xml"/>
     <import resource="spring-service.xml"/>
+    <import resource="spring-thymeleaf.xml"/>
+    <import resource="spring-quartz.xml"/>
+    <import resource="spring-i18n.xml"/>
 </beans>

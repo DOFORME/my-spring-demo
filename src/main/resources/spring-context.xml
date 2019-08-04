@@ -33,12 +33,6 @@
         <property name="basePackage" value="org.lc.dao"/>
     </bean>
 
-    <!-- 配置mybatis会话工厂 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
-        <property name="dataSource" ref="myDataSource"/>
-    </bean>
-
     <!-- 配置数据源 -->
     <bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close"
@@ -46,6 +40,12 @@
           p:url="${jdbc.url}"
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"/>
+
+    <!-- 配置mybatis会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
 
     <!-- 配置jdbcTemplate -->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"

@@ -97,4 +97,5 @@
     <import resource="spring-thymeleaf.xml"/>
     <import resource="spring-quartz.xml"/>
     <import resource="spring-i18n.xml"/>
+    <import resource="spring-ehcache.xml"/>
 </beans>

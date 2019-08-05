@@ -11,7 +11,7 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     @Cacheable("cacheNums")
-    public int test(String num) {
+    public Integer test(String num) {
         log.info("come in test method");
         return 123;
     }

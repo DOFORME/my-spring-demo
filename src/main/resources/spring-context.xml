@@ -40,11 +40,6 @@
     <cache:annotation-driven/>
 
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/static/"/>
-        <property name="suffix" value=".html"/>
-    </bean>
-
     <!-- 配置mapper接口包路径 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="org.lc.dao"/>
@@ -93,7 +88,7 @@
     <import resource="spring-redis.xml"/>
     <import resource="spring-bean.xml"/>
     <import resource="spring-service.xml"/>
-    <import resource="spring-mvc.xml"/>
+<!--    <import resource="../webapp/WEB-INF/springMVC-servlet.xml"/>-->
     <import resource="spring-thymeleaf.xml"/>
     <import resource="spring-quartz.xml"/>
     <import resource="spring-i18n.xml"/>

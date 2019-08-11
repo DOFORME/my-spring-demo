@@ -1,10 +1,17 @@
 package org.lc.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
+@ToString
 public class Student extends Base {
 
+    @NotNull
     private Integer id;
 
     private String name;

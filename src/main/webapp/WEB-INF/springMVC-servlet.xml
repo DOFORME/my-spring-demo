@@ -2,24 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/static/"/>
-        <property name="suffix" value=".html"/>
-    </bean>
-
-    <!-- 开启springMVC注解支持 -->
-    <mvc:annotation-driven/>
-
-    <!-- 静态资源映射 -->
-    <mvc:resources mapping="/static/**" location="/static/"/>
+    <context:component-scan base-package="org.lc.controller"/>
 
     <!-- 开启springMVC注解支持 -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven enable-matrix-variables="true"/>
 
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/static/"/>
@@ -27,4 +21,9 @@
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/static/"/>
+    </bean>
 </beans>

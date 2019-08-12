@@ -30,4 +30,9 @@ public class PropertiesTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void getClassName() {
+        log.info(String.class.getName());
+    }
 }

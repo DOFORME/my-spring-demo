@@ -27,7 +27,6 @@
     <context:property-placeholder location="classpath:config.properties"/>
 
 
-
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
             <set>
@@ -68,16 +67,21 @@
         <property name="dataSource" ref="myDataSource"/>
     </bean>
 
-    <!-- 事务策略 -->
-    <tx:advice id="myTxAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <tx:method name="save"/>
-        </tx:attributes>
-    </tx:advice>
+    <!-- 配置事务策略 -->
+    <!--    <tx:advice id="myTxAdvice" transaction-manager="txManager">-->
+    <!--        <tx:attributes>-->
+    <!--            <tx:method name="save" rollback-for="java.lang.Exception" timeout="5"/>-->
+    <!--        </tx:attributes>-->
+    <!--    </tx:advice>-->
+
+    <!-- 事务注解驱动 -->
+    <tx:annotation-driven transaction-manager="txManager"/>
 
     <bean id="logAspect" class="org.lc.aspect.LogAspect"/>
 
     <aop:config>
+        <!-- 配置事务的切点 -->
+        <!--        <aop:advisor advice-ref="myTxAdvice" pointcut="execution(* org.lc.service.impl..*.*(..))"/>-->
         <aop:aspect ref="logAspect">
             <aop:pointcut id="logPoint" expression="execution(* org.lc.service.impl..*.*(..))"/>
             <aop:around pointcut-ref="logPoint" method="printLog"/>
@@ -88,7 +92,6 @@
     <import resource="spring-redis.xml"/>
     <import resource="spring-bean.xml"/>
     <import resource="spring-service.xml"/>
-<!--    <import resource="../webapp/WEB-INF/springMVC-servlet.xml"/>-->
     <import resource="spring-thymeleaf.xml"/>
     <import resource="spring-quartz.xml"/>
     <import resource="spring-i18n.xml"/>

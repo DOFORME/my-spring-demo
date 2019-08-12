@@ -6,8 +6,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 @Slf4j
 public class LogAspect {
 
-    public void printLog(ProceedingJoinPoint call) throws Throwable {
+    public Object printLog(ProceedingJoinPoint call) throws Throwable {
         log.error("this is the aspect");
-        call.proceed();
+        return call.proceed();
     }
 }

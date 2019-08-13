@@ -12,7 +12,7 @@
 <%= ((BeanPropertyBindingResult) request.getAttribute("org.springframework.validation.BindingResult.student"))
         .getFieldError("id").getDefaultMessage()%>
 <form:form modelAttribute="student">
-    <form:errors path="id"/>
+    <form:errors path="*"/>
 </form:form>
 
 </body>

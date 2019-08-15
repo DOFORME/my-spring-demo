@@ -91,11 +91,15 @@
         </aop:aspect>
     </aop:config>
 
+    <bean id="beanLifeCircle" class="org.lc.bean.BeanLifeCircle" destroy-method="destroy" init-method="init">
+        <property name="name" value="bean life circle name"/>
+    </bean>
+
     <!-- 导入其他配置文件 -->
     <import resource="spring-redis.xml"/>
     <import resource="spring-bean.xml"/>
     <import resource="spring-service.xml"/>
-<!--    <import resource="spring-thymeleaf.xml"/>-->
+    <import resource="spring-thymeleaf.xml"/>
     <import resource="spring-quartz.xml"/>
     <import resource="spring-i18n.xml"/>
     <import resource="spring-ehcache.xml"/>

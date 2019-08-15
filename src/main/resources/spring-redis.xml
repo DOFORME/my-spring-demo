@@ -53,4 +53,10 @@
     <bean name="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" factory-method="create">
         <constructor-arg ref="connectionFactory"/>
     </bean>
+
+<!--    <bean name="redisCacheConfig" class="org.springframework.data.redis.cache.RedisCacheConfiguration">-->
+
+<!--    </bean>-->
+
+
 </beans>

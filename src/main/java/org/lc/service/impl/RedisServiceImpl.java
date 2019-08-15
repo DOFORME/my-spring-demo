@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.lc.entity.Student;
 import org.lc.service.RedisService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,9 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-//    @Cacheable(key = "test" , value = "student")
+    @Cacheable(value = "common", key = "#id")
     public Student testCache(int id) {
+        log.info("方法体执行");
         Student student = new Student();
         student.setName("test").setAge(20);
         return student;

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Properties;
 
 @Slf4j
@@ -34,5 +35,13 @@ public class PropertiesTest {
     @Test
     void getClassName() {
         log.info(String.class.getName());
+    }
+
+    @Test
+    void testDate() {
+        Date date = new Date();
+        Date date1 = new Date(1546272000000L);
+        log.info("{}", date.after(date1));
+        log.info("{}", date1);
     }
 }

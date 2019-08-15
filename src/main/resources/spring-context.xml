@@ -27,14 +27,17 @@
     <context:property-placeholder location="classpath:config.properties"/>
 
 
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default"/>
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="cacheNums"/>
-            </set>
-        </property>
-    </bean>
+<!--    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">-->
+<!--        <property name="caches">-->
+<!--            <set>-->
+<!--                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default"/>-->
+<!--                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="cacheNums"/>-->
+<!--                <bean class="org.springframework.data.redis.cache.RedisCache">-->
+<!--                    <constructor-arg name="name" value="common"/>-->
+<!--                </bean>-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
 
     <cache:annotation-driven/>
 
